@@ -25,7 +25,7 @@ import java.util.List;
  * Code used from: https://github.com/hippipi/volcanic-mine-plugin/blob/master/src/main/java/com/volcanicmine/VMPlugin.java
  */
 public class VMGasperPlugin extends Plugin {
-    
+
     private static final int PLATFORM_STAGE_3_ID = 31000;
 
     @Inject
