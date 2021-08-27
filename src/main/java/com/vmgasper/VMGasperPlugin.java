@@ -25,9 +25,7 @@ import java.util.List;
  * Code used from: https://github.com/hippipi/volcanic-mine-plugin/blob/master/src/main/java/com/volcanicmine/VMPlugin.java
  */
 public class VMGasperPlugin extends Plugin {
-
-    private static final int VM_REGION_NORTH = 15263;
-    private static final int VM_REGION_SOUTH = 15262;
+    
     private static final int PLATFORM_STAGE_3_ID = 31000;
 
     @Inject
@@ -35,12 +33,6 @@ public class VMGasperPlugin extends Plugin {
 
     @Inject
     private VMGasperConfig config;
-
-    private boolean isInVM()
-    {
-        return WorldPoint.fromLocalInstance(client, client.getLocalPlayer().getLocalLocation()).getRegionID() == VM_REGION_NORTH ||
-                WorldPoint.fromLocalInstance(client, client.getLocalPlayer().getLocalLocation()).getRegionID() == VM_REGION_SOUTH;
-    }
 
     @Subscribe
     public void onGameObjectSpawned(GameObjectSpawned event) {
@@ -56,8 +48,8 @@ public class VMGasperPlugin extends Plugin {
                 // Notify player if the stage 3 platform is beneath them
                 if (playerX == objectX && playerY == objectY)
                 {
-                    player.setOverheadCycle(100);
-                    player.setOverheadText("* Gasp *");
+                    player.setOverheadCycle(config.duration() > 0 ? config.duration() : 100);
+                    player.setOverheadText(!config.text().isEmpty() ? config.text() : "* Gasp *");
                 }
             }
         }
